@@ -1,3 +1,11 @@
+### For Mac M2 users
+# https://developer.apple.com/metal/tensorflow-plugin/
+
+
+# python3 -m venv ~/venv-metal
+# source ~/venv-metal/bin/activate
+# python -m pip install -U pip
+
 import tensorflow as tf
 
 cifar = tf.keras.datasets.cifar100
