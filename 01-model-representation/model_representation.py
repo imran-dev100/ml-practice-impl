@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 file='../sample-data/Housing-2.csv'
 
 x_train = np.array([]) # Area of the house
-y_train = np.array([]) # Price
+y_train = np.array([]) # Price of the house
 
 with open(file, mode ='r')as file:
   csvFile = csv.reader(file)
