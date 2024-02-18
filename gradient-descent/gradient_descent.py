@@ -1,4 +1,4 @@
-import csv, math, copy
+import csv, math
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
@@ -73,8 +73,7 @@ def plt_contour_wgrad(x, y, hist, ax, w_range=[-100, 500, 5], b_range=[-500, 500
         for j in range(w0.shape[1]):
             z[i][j] = compute_cost(x, y, w0[i][j], b0[i][j] )
 
-    CS = ax.contour(w0, b0, z, contours, linewidths=2,
-                   colors=['blue', 'orange', 'darkred', 'magenta', 'purple'])
+    CS = ax.contour(w0, b0, z, contours, linewidths=2, colors=['blue', 'orange', 'darkred', 'magenta', 'purple'])
     ax.clabel(CS, inline=1, fmt='%1.0f', fontsize=10)
     ax.set_xlabel("w");  ax.set_ylabel("b")
     ax.set_title('Contour plot of cost J(w,b), vs b,w with path of gradient descent')
