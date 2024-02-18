@@ -168,9 +168,9 @@ class plt_update_onclick:
             for artist in self.dyn_items:
                 artist.remove()
 
-            a = self.ax[1].scatter(ws,bs, s=100, color=dlblue, zorder= 10, label="cost with \ncurrent w,b")
-            b = self.ax[1].hlines(bs, self.ax[1].get_xlim()[0],ws, lw=4, color=dlpurple, ls='dotted')
-            c = self.ax[1].vlines(ws, self.ax[1].get_ylim()[0],bs, lw=4, color=dlpurple, ls='dotted')
+            a = self.ax[1].scatter(ws,bs, s=100, color='blue', zorder= 10, label="cost with \ncurrent w,b")
+            b = self.ax[1].hlines(bs, self.ax[1].get_xlim()[0],ws, lw=4, color='purple', ls='dotted')
+            c = self.ax[1].vlines(ws, self.ax[1].get_ylim()[0],bs, lw=4, color='purple', ls='dotted')
             d = self.ax[1].annotate(f"Cost: {cst:.0f}", xy= (ws, bs), xytext = (4,4), textcoords = 'offset points',
                                bbox=dict(facecolor='white'), size = 10)
 
@@ -256,16 +256,16 @@ def compute_cost(x, y, w, b):
 
 file='../sample-data/Housing-2.csv'
 
-x_train = np.array([]) # Area of the house
-y_train = np.array([]) # Price of the house
+x_train = np.array([]) 
+y_train = np.array([]) 
 
 with open(file, mode ='r')as file:
   csvFile = csv.reader(file)
   header = next(csvFile) # skipping headers
   
   for line in csvFile:
-        x_train = np.append(x_train, float(line[1]))
-        y_train = np.append(y_train, float(line[0]))
+        x_train = np.append(x_train, float(line[1])/1000) # Area of the house
+        y_train = np.append(y_train, float(line[0])/1000) # Price of the house
 
 plt_intuition(x_train,y_train)
 
