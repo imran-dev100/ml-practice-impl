@@ -170,7 +170,7 @@ class plt_update_onclick:
 
             a = self.ax[1].scatter(ws,bs, s=100, color='blue', zorder= 10, label="cost with \ncurrent w,b")
             b = self.ax[1].hlines(bs, self.ax[1].get_xlim()[0],ws, lw=4, color='purple', ls='dotted')
-            c = self.ax[1].vlines(ws, self.ax[1].get_ylim()[0],bs, lw=4, color='purple', ls='dotted')
+            c = self.ax[1].vlines(ws, self.ax[1].get_ylim()[0],bs, lw=4, color='green', ls='dotted')
             d = self.ax[1].annotate(f"Cost: {cst:.0f}", xy= (ws, bs), xytext = (4,4), textcoords = 'offset points',
                                bbox=dict(facecolor='white'), size = 10)
 
