@@ -24,7 +24,7 @@ n = len(y_train)
 for i in range(m):
     print(f"x^{i}, y^{i} = {x_train[i]}, {y_train[i]}")
 
-plt.scatter(x_train, y_train, marker = 'x')
+plt.scatter(x_train, y_train, marker = 'x', c = 'g')
 plt.title("Housing prices")
 plt.ylabel("Price")
 plt.xlabel("Area")
