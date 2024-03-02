@@ -17,7 +17,7 @@ with open(file, mode ='r')as file:
   
   for line in csvFile:
         # print(f"{int(line[1])} - {int(line[2])} - {int(line[3])} - {int(line[4])}")
-        x = [float(line[1]) / 1000,  # Area
+        x = [int(line[1]) / float(1000) ,  # Area
              int(line[2]),  # Bedrooms
              int(line[3]),  # Bathrooms
              int(line[4])]  # Floor
@@ -25,7 +25,6 @@ with open(file, mode ='r')as file:
         y_train = np.append(y_train, float(line[0])/1000)
 
 x_train = np.array(x_array)
-
 
 # data is stored in numpy array/matrix
 # print(f"X Shape: {x_train.shape}, X Type:{type(x_train)})")
@@ -35,7 +34,7 @@ x_train = np.array(x_array)
 
 b_init = 785.1811367994083
 w_init = np.array([ 0.39133535, 18.75376741, -53.36032453, -26.42131618])
-# print(f"w_init shape: {w_init.shape}, b_init type: {type(b_init)}")
+# print(f"w_init shape: {w_init.shape}, b_init type: {tyßpe(b_init)}")
 
 def predict_single_loop(x, w, b): 
     """
@@ -154,8 +153,8 @@ def compute_gradient(X, y, w, b):
       dj_db (scalar):       The gradient of the cost w.r.t. the parameter b. 
     """
     m,n = X.shape           #(number of examples, number of features)
-    # print(f"X: {X}")
-    # print(f"m: {m}\nn: {n}")
+    print(f"X: {X}")
+    print(f"m: {m}\nn: {n}")
     dj_dw = np.zeros((n,))
     dj_db = 0.
 
@@ -216,9 +215,9 @@ def gradient_descent(X, y, w_in, b_in, cost_function, gradient_function, alpha, 
         if i% math.ceil(num_iters / 10) == 0:
             print(f"Iteration {i:4d}: Cost {J_history[-1]:8.2f}   ")
 
-        print(f"w:{w}") 
-        print(f"b:{b}") 
-        print(f"J_history:{J_history}")       
+        # print(f"w:{w}") 
+        # print(f"b:{b}") 
+        # print(f"J_history:{J_history}")       
     return w, b, J_history #return final w,b and J history for graphing
 
 # initialize parameters
@@ -233,5 +232,15 @@ w_final, b_final, J_hist = gradient_descent(x_train, y_train, initial_w, initial
                                                     alpha, iterations)
 print(f"b,w found by gradient descent: {b_final:0.2f},{w_final} ")
 m,_ = x_train.shape
-# for i in range(m):
-#     print(f"prediction: {np.dot(x_train[i], w_final) + b_final:0.2f}, target value: {y_train[i]}")
+for i in range(m):
+    print(f"prediction: {np.dot(x_train[i], w_final) + b_final:0.2f}, target value: {y_train[i]}")
+
+# plot cost versus iteration  
+fig, (ax1, ax2) = plt.subplots(1, 2, constrained_layout=True, figsize=(12, 4))
+ax1.plot(J_hist)
+ax2.plot(10 + np.arange(len(J_hist[100:])), J_hist[100:])
+# ax2.plot(J_hist)
+ax1.set_title("Cost vs. iteration");  ax2.set_title("Cost vs. iteration (tail)")
+ax1.set_ylabel('Cost')             ;  ax2.set_ylabel('Cost') 
+ax1.set_xlabel('iteration step')   ;  ax2.set_xlabel('iteration step') 
+plt.show()
