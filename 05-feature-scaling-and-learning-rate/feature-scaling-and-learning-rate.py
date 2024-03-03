@@ -9,9 +9,14 @@ np.set_printoptions(precision=2)
 # plt.style.use('./deeplearning.mplstyle')
 
 
-
 def load_house_data():
-    file='/Volumes/ExternalSSD/ML-Specialization/jupyter-workspace/ml-practice-impl/sample-data/Housing-2.csv'
+    data = np.loadtxt("/Volumes/ExternalSSD/ML-Specialization/jupyter-workspace/ml-practice-impl/sample-data/houses.txt", delimiter=',', skiprows=1)
+    X = data[:,:4]
+    y = data[:,4]
+    return X, y
+
+def load_house_data_personal():
+    file='/Volumes/ExternalSSD/ML-Specialization/jupyter-workspace/ml-practice-impl/sample-data/Houses-2.csv'
 
     x_array = [] # Area of the house in 1000 sq. ft.
     # print(f"Empty Array initialization:{x_array}")
@@ -35,21 +40,6 @@ def load_house_data():
     print(f"x_train: {x_train}")
     print(f"y_train: {y_train}")
     return x_train, y_train
-
-# load the dataset
-X_train, y_train = load_house_data()
-X_features = ['size(sqft)','bedrooms','floors', 'bathrooms']
-
-
-fig,ax=plt.subplots(1, 4, figsize=(12, 3), sharey=True) 
-#fig,ax=plt.subplots(1, 4, figsize=(24, 6), sharey=True) 
-
-for i in range(len(ax)):
-    ax[i].scatter(X_train[:,i],y_train)
-    ax[i].set_xlabel(X_features[i])
-ax[0].set_ylabel("Price (1000's)")
-plt.show()
-
 
 
 #This version saves more values and is more verbose than the assigment versons
@@ -170,5 +160,54 @@ def run_gradient_descent(X,y,iterations=1000, alpha = 1e-6):
     
     return(w_out, b_out, hist_out)
 
+def plot_cost_i_w(X,y,hist):
+    ws = np.array([ p[0] for p in hist["params"]])
+    rng = max(abs(ws[:,0].min()),abs(ws[:,0].max()))
+    wr = np.linspace(-rng+0.27,rng+0.27,20)
+    cst = [compute_cost(X,y,np.array([wr[i],-32, -67, -1.46]), 221) for i in range(len(wr))]
+
+    fig,ax = plt.subplots(1,2,figsize=(12,3))
+    ax[0].plot(hist["iter"], (hist["cost"]));  ax[0].set_title("Cost vs Iteration")
+    ax[0].set_xlabel("iteration"); ax[0].set_ylabel("Cost")
+    ax[1].plot(wr, cst); ax[1].set_title("Cost vs w[0]")
+    ax[1].set_xlabel("w[0]"); ax[1].set_ylabel("Cost")
+    ax[1].plot(ws[:,0],hist["cost"])
+    plt.show()
+
+##########################################################
+##########################################################
+###################### MAIN EXECUTION ####################
+##########################################################
+##########################################################
+    
+
+# load the dataset
+X_train, y_train = load_house_data()
+X_features = ['size(sqft)','bedrooms','floors','age']
+## For personal data
+#X_features = ['size(sqft)','bedrooms','floors', 'bathrooms']
+
+
+fig,ax=plt.subplots(1, 4, figsize=(12, 3), sharey=True) 
+#fig,ax=plt.subplots(1, 4, figsize=(24, 6), sharey=True) 
+
+for i in range(len(ax)):
+    ax[i].scatter(X_train[:,i],y_train)
+    ax[i].set_xlabel(X_features[i])
+ax[0].set_ylabel("Price (1000's)")
+plt.show()
+
 #set alpha to 9.9e-7
 _, _, hist = run_gradient_descent(X_train, y_train, 10, alpha = 9.9e-7)
+
+plot_cost_i_w(X_train, y_train, hist)
+
+#set alpha to 9e-7
+_,_,hist = run_gradient_descent(X_train, y_train, 10, alpha = 9e-7)
+
+plot_cost_i_w(X_train, y_train, hist)
+
+#set alpha to 1e-7
+_,_,hist = run_gradient_descent(X_train, y_train, 10, alpha = 1e-7)
+
+plot_cost_i_w(X_train,y_train,hist)
