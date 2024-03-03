@@ -1,6 +1,6 @@
 import csv
 import numpy as np
-    import copy, math
+import copy, math
 import matplotlib.pyplot as plt
 # from lab_utils_multi import  load_house_data, run_gradient_descent 
 # from lab_utils_multi import  norm_plot, plt_equal_scale, plot_cost_i_w
