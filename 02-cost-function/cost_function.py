@@ -50,11 +50,17 @@ def plt_house_x(X, y,f_wb=None, ax=None):
 
 def plt_intuition(x_train, y_train):
 
-    w_range = np.array([1000-1000,1000+1000])
+    # Specifying the range of the w from 0-2000 [0,2000]
+    w_range = np.array([1000-1000,1000+1000]) 
+
     tmp_b = 100
 
+    # Creating an array with the multiples of 5 from range of the w
     w_array = np.arange(*w_range, 5)
+
+    # Initializing a new array with size of w_array and with 0 as intial value
     cost = np.zeros_like(w_array)
+
     for i in range(len(w_array)):
         tmp_w = w_array[i]
         cost[i] = compute_cost(x_train, y_train, tmp_w, tmp_b)
@@ -254,7 +260,7 @@ def compute_cost(x, y, w, b):
 #                  SOURCE CODE                    #
 #-------------------------------------------------#
 
-file='../sample-data/Housing-2.csv'
+file='/Volumes/ExternalSSD/ML-Specialization/jupyter-workspace/ml-practice-impl/sample-data/Housing-2.csv'
 
 x_train = np.array([]) 
 y_train = np.array([]) 
