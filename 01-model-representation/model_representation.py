@@ -2,7 +2,7 @@ import numpy as np
 import csv
 import matplotlib.pyplot as plt
 
-file='../sample-data/Housing-2.csv'
+file='/Volumes/ExternalSSD/ML-Specialization/jupyter-workspace/ml-practice-impl/sample-data/Housing-2.csv'
 
 x_train = np.array([]) # Area of the house
 y_train = np.array([]) # Price of the house
