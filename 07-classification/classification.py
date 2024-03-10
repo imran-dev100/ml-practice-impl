@@ -1,7 +1,19 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from plt_one_addpt_onclick import dlc, dlblue, plt_one_addpt_onclick
 
+#---------------------------------------------------------------------------------------#
+import os
+import sys
+# Get the directory of the current script
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Get the parent directory
+parent_dir = os.path.dirname(current_dir)
+# Add the parent directory to sys.path
+sys.path.append(parent_dir)
+# Now you can import the module from the parent directory
+# Suppose there's a module named 'parent_module.py' in the parent directory
+from dependencies.plt_one_addpt_onclick import dlc, dlblue, plt_one_addpt_onclick
+#---------------------------------------------------------------------------------------#
 
 def plot_data(X, y, ax, pos_label="y=1", neg_label="y=0", s=80, loc='best' ):
     """ plots logistic data with two axis """
