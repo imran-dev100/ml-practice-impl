@@ -30,7 +30,6 @@ plt.ylabel("Price")
 plt.xlabel("Area")
 plt.show()
 
-
 w = 1000
 b = 100
 print(f"w: {w}\nb: {b}")
